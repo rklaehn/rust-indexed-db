@@ -126,6 +126,11 @@ impl IdbObjectStore<'_> {
                 self.create_idx_common(base)
             }
 
+            pub fn index(&self, name: &str) -> Result<IdbIndex, DomException> {
+                let index = self.inner.index(name)?;
+                Ok(IdbIndex::new(index, &self))
+            }
+
             /// Create an index at the given key path with the given parameters
             ///
             /// Features required: `indices`
